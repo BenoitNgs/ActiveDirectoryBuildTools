@@ -44,7 +44,7 @@ function Set-zADReplicationSiteRename {
 
 
 $param = @{
-    Identity = "Tata";
+    Identity = "Default-First-Site-Name";
     NewName = "AzureStack"
 }
 
