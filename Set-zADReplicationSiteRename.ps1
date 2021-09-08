@@ -6,9 +6,6 @@ function Set-zADReplicationSiteRename {
         [Parameter(Mandatory = $true)][string]$NewName
     )
 
-    Write-Warning $Identity
-    Write-Warning $NewName
-
     Import-Module ActiveDirectory
 
     if (Get-ADReplicationSite | Where-Object { $_.Name -eq $NewName }) { Write-Error "AD Site already exist: $NewName"; return $false }
