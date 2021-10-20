@@ -1,16 +1,23 @@
 #Build new AD Forest
 #Install DNS role in same time
 
-
-$NTDSDBPath = "F:\Windows\NTDS"
-$NTDSLogPath = "F:\Windows\NTDS"
-$SYSVOLPath = "F:\Windows\SYSVOL"
-$DomainName = "teddy.lab"
-$NETBIOSName = "TEDDY"
-$DSRM = ConvertTo-SecureString "ToBeReadInKeyVault" -AsPlainText -Force
+$param = @{
+    CreateDnsDelegation = $false
+    ForestMode = 'WinThreshold'
+    DomainMode = 'WinThreshold'
+    DomainName = 'teddy.lab'
+    DomainNetbiosName = 'TEDDY'
+    InstallDns = $true
+    DatabasePath = 'C:\Windows\NTDS'
+    LogPath = 'C:\Windows\NTDS'
+    SysvolPath = 'C:\Windows\SYSVOL'
+    NoRebootOnCompletion = $false
+    Force = $true
+    SafeModeAdministratorPassword = ConvertTo-SecureString "ToBeReadInKeyVault-123" -AsPlainText -Force
+}
 
 Install-WindowsFeature -Name AD-Domain-Services
 
 Import-Module ADDSDeployment
 
-Install-ADDSForest -CreateDnsDelegation:$false -DomainMode "WinThreshold" -ForestMode "WinThreshold" -DomainName $DomainName -DomainNetbiosName $NETBIOSName -InstallDns:$true -DatabasePath $NTDSDBPath -LogPath $NTDSLogPath -NoRebootOnCompletion:$false -SysvolPath $SYSVOLPath -Force:$true -SafeModeAdministratorPassword $DSRM
+Install-ADDSForest @param
