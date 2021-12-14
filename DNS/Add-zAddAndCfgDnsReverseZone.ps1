@@ -1,4 +1,6 @@
-﻿$NetworkScope = "172.20.122.0"
+﻿Import-Module DnsServer
+
+$NetworkScope = "172.20.122.0"
 $NetworkMask = "24"
 $ReplicationScope = "Forest"
 $DynamicUpdate = "NonsecureAndSecure"
