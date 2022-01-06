@@ -58,20 +58,20 @@ function Set-PSOCreateAndUpdate{
         $objPSO = Get-ADFineGrainedPasswordPolicy -Identity $PSOSettings.Name
     }else{
         Write-Output "Update PSO"
-        Set-ADFineGrainedPasswordPolicy -Identity $objPSO.Name -ComplexityEnabled $ComplexityEnabled
-        Set-ADFineGrainedPasswordPolicy -Identity $objPSO.Name -Description $Description
-        Set-ADFineGrainedPasswordPolicy -Identity $objPSO.Name -LockoutDuration $LockoutDuration
-        Set-ADFineGrainedPasswordPolicy -Identity $objPSO.Name -LockoutObservationWindow $LockoutObservationWindow
-        Set-ADFineGrainedPasswordPolicy -Identity $objPSO.Name -LockoutThreshold $LockoutThreshold
-        Set-ADFineGrainedPasswordPolicy -Identity $objPSO.Name -MaxPasswordAge $MaxPasswordAge
-        Set-ADFineGrainedPasswordPolicy -Identity $objPSO.Name -MinPasswordAge $MinPasswordAge
-        Set-ADFineGrainedPasswordPolicy -Identity $objPSO.Name -MinPasswordLength $MinPasswordLength
-        Set-ADFineGrainedPasswordPolicy -Identity $objPSO.Name -PasswordHistoryCount $PasswordHistoryCount
-        Set-ADFineGrainedPasswordPolicy -Identity $objPSO.Name -Precedence $Precedence
-        Set-ADFineGrainedPasswordPolicy -Identity $objPSO.Name -ReversibleEncryptionEnabled $ReversibleEncryptionEnabled
+        if($objPSO.ComplexityEnabled -ne $ComplexityEnabled){Write-Output "Set ComplexityEnabled"; Set-ADFineGrainedPasswordPolicy -Identity $objPSO.Name -ComplexityEnabled $ComplexityEnabled}
+        if($objPSO.Description -ne $Description){Write-Output "Set Description"; Set-ADFineGrainedPasswordPolicy -Identity $objPSO.Name -Description $Description}
+        if($objPSO.LockoutDuration -ne $LockoutDuration){Write-Output "Set LockoutDuration"; Set-ADFineGrainedPasswordPolicy -Identity $objPSO.Name -LockoutDuration $LockoutDuration}
+        if($objPSO.LockoutObservationWindow -ne $LockoutObservationWindow){Write-Output "Set LockoutObservationWindow"; Set-ADFineGrainedPasswordPolicy -Identity $objPSO.Name -LockoutObservationWindow $LockoutObservationWindow}
+        if($objPSO.LockoutObservationWindow -ne $LockoutThreshold){Write-Output "Set LockoutThreshold"; Set-ADFineGrainedPasswordPolicy -Identity $objPSO.Name -LockoutThreshold $LockoutThreshold}
+        if($objPSO.LockoutObservationWindow -ne $MaxPasswordAge){Write-Output "Set MaxPasswordAge"; Set-ADFineGrainedPasswordPolicy -Identity $objPSO.Name -MaxPasswordAge $MaxPasswordAge}
+        if($objPSO.LockoutObservationWindow -ne $MinPasswordAge){Write-Output "Set MinPasswordAge"; Set-ADFineGrainedPasswordPolicy -Identity $objPSO.Name -MinPasswordAge $MinPasswordAge}
+        if($objPSO.LockoutObservationWindow -ne $MinPasswordLength){Write-Output "Set MinPasswordLength"; Set-ADFineGrainedPasswordPolicy -Identity $objPSO.Name -MinPasswordLength $MinPasswordLength}
+        if($objPSO.LockoutObservationWindow -ne $PasswordHistoryCount){Write-Output "Set PasswordHistoryCount"; Set-ADFineGrainedPasswordPolicy -Identity $objPSO.Name -PasswordHistoryCount $PasswordHistoryCount}
+        if($objPSO.LockoutObservationWindow -ne $Precedence){Write-Output "Set Precedence"; Set-ADFineGrainedPasswordPolicy -Identity $objPSO.Name -Precedence $Precedence}
+        if($objPSO.LockoutObservationWindow -ne $ReversibleEncryptionEnabled){Write-Output "Set ReversibleEncryptionEnabled"; Set-ADFineGrainedPasswordPolicy -Identity $objPSO.Name -ReversibleEncryptionEnabled $ReversibleEncryptionEnabled}
     }
     
-    Set-ADObject -Identity $objPSO.Name -ProtectedFromAccidentalDeletion:$true
+    Set-ADObject -Identity $objPSO.DistinguishedName -ProtectedFromAccidentalDeletion:$true
 }
 
 Set-PSOCreateAndUpdate @param
