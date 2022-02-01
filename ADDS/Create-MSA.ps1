@@ -8,9 +8,9 @@ Get-KdsRootKey
 
 
 $Param = @{
-    Name = 'gMSA-AADC01'
+    Name = 'MSA-AADC01'
     Description = 'Service account for AADC'
-    DNSHostName = 'gMSA-AADC01.teddy.lan'
+    DNSHostName = 'MSA-AADC01.teddy.lan'
     PrincipalsAllowedToRetrieveManagedPassword = 'AADC01$'
 }
 
