@@ -1,14 +1,6 @@
 function Get-zADDomainControlerComputer{
-    $lstADDomain = @()
-    $lstADDomain += $(Get-ADDomain).Forest
-    $lstADDomain += $(Get-ADDomain).ChildDomains
-
-    $lstPDC = @()
-    $lstPDC += $(Get-ADDomain).Forest | Get-ADDomain | Select-Object -Property PDCEmulator
-    $lstPDC += $(Get-ADDomain).ChildDomains | Get-ADDomain | Select-Object -Property PDCEmulator
-
     $lstDC = @()
-    foreach($ADDomain in $lstADDomain){
+    foreach($ADDomain in $(Get-ADForest).Domains){
         $lstDC += $(Get-ADDomain -server:$ADDomain).ReadOnlyReplicaDirectoryServers
         $lstDC += $(Get-ADDomain -server:$ADDomain).replicadirectoryservers
     }
